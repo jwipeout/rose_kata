@@ -11,109 +11,49 @@ class GildedRose
     if @name == "Aged Brie"
       if @quality < 50
         @quality = @quality + 1
-        if @name == "Backstage passes to a TAFKAL80ETC concert"
-          if @days_remaining < 11
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-          if @days_remaining < 6
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-        end
-      end
-      if @name == "Sulfuras, Hand of Ragnaros"
-      else
-        @days_remaining = @days_remaining - 1
       end
 
+      @days_remaining = @days_remaining - 1
+
       if @days_remaining < 0
-        if @name == "Aged Brie"
-          if @quality < 50
-            @quality = @quality + 1
-          end
-        else
-          if @name == "Backstage passes to a TAFKAL80ETC concert"
-            @quality = @quality - @quality
-          else
-            if @quality > 0
-              if @name == "Sulfuras, Hand of Ragnaros"
-              else
-                @quality = @quality - 1
-              end
-            end
-          end
+        if @quality < 50
+          @quality = @quality + 1
         end
       end
     elsif @name == "Backstage passes to a TAFKAL80ETC concert"
       if @quality < 50
-        @quality = @quality + 1
-        if @name == "Backstage passes to a TAFKAL80ETC concert"
-          if @days_remaining < 11
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-          if @days_remaining < 6
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-        end
-      end
-      if @name == "Sulfuras, Hand of Ragnaros"
-      else
-        @days_remaining = @days_remaining - 1
-      end
 
-      if @days_remaining < 0
-        if @name == "Aged Brie"
+        @quality = @quality + 1
+
+        if @days_remaining < 11
           if @quality < 50
             @quality = @quality + 1
           end
-        else
-          if @name == "Backstage passes to a TAFKAL80ETC concert"
-            @quality = @quality - @quality
-          else
-            if @quality > 0
-              if @name == "Sulfuras, Hand of Ragnaros"
-              else
-                @quality = @quality - 1
-              end
-            end
+        end
+
+        if @days_remaining < 6
+          if @quality < 50
+            @quality = @quality + 1
           end
         end
       end
+
+      @days_remaining = @days_remaining - 1
+
+      if @days_remaining < 0
+        @quality = @quality - @quality
+      end
+    elsif @name == "Sulfuras, Hand of Ragnaros"
     else
       if @quality > 0
-        if @name == "Sulfuras, Hand of Ragnaros"
-        else
-          @quality = @quality - 1
-        end
-      end
-      if @name == "Sulfuras, Hand of Ragnaros"
-      else
-        @days_remaining = @days_remaining - 1
+        @quality = @quality - 1
       end
 
+      @days_remaining = @days_remaining - 1
+
       if @days_remaining < 0
-        if @name == "Aged Brie"
-          if @quality < 50
-            @quality = @quality + 1
-          end
-        else
-          if @name == "Backstage passes to a TAFKAL80ETC concert"
-            @quality = @quality - @quality
-          else
-            if @quality > 0
-              if @name == "Sulfuras, Hand of Ragnaros"
-              else
-                @quality = @quality - 1
-              end
-            end
-          end
+        if @quality > 0
+          @quality = @quality - 1
         end
       end
     end

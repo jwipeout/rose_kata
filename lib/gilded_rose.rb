@@ -39,6 +39,18 @@ class GildedRose
       if @days_remaining < 0
         @quality -= @quality
       end
+    elsif @name == "Conjured Mana Cake"
+      if @quality > 0
+        @quality -= 2
+      end
+
+      @days_remaining -= 1
+
+      if @days_remaining < 0
+        if @quality > 0
+          @quality -= 2
+        end
+      end
     elsif @name == "Sulfuras, Hand of Ragnaros"
     else
       if @quality > 0

@@ -100,16 +100,6 @@ class GildedRose
   end
 
   def tick
-    if @name == "Aged Brie"
-      ItemFactory.build(name).tick(self)
-    elsif @name == "Backstage passes to a TAFKAL80ETC concert"
-      ItemFactory.build(name).tick(self)
-    elsif @name == "Conjured Mana Cake"
-      ItemFactory.build(name).tick(self)
-    elsif @name == "Sulfuras, Hand of Ragnaros"
-      ItemFactory.build(name).tick(self)
-    else
-      ItemFactory.build(name).tick(self)
-    end
+    ItemFactory.build(name).tick(self)
   end
 end

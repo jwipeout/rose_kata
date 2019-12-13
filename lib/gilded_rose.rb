@@ -16,17 +16,17 @@ end
 
 class AgedBrie
   def tick(degrade)
-    if degrade.quality < 50
-      degrade.quality += 1
-    end
-
     degrade.days_remaining -= 1
 
-    if degrade.days_remaining < 0
-      if degrade.quality < 50
-        degrade.quality += 1
-      end
-    end
+    return if degrade.quality >= 50
+
+    degrade.quality += 1
+
+    return if degrade.days_remaining >= 0
+
+    return if degrade.quality >= 50
+
+    degrade.quality += 1
   end
 end
 
@@ -36,36 +36,28 @@ class BackstagePass
 
       degrade.quality += 1
 
-      if degrade.days_remaining < 11
-        degrade.quality += 1
-      end
+      degrade.quality += 1 if degrade.days_remaining < 11
 
-      if degrade.days_remaining < 6
-        degrade.quality += 1
-      end
+      degrade.quality += 1 if degrade.days_remaining < 6
     end
 
     degrade.days_remaining -= 1
 
-    if degrade.days_remaining < 0
-      degrade.quality -= degrade.quality
-    end
+    return if degrade.days_remaining >= 0
+
+    degrade.quality -= degrade.quality
   end
 end
 
 class ConjuredManaCake
   def tick(degrade)
-    if degrade.quality > 0
-      degrade.quality -= 2
-    end
-
     degrade.days_remaining -= 1
 
-    if degrade.days_remaining < 0
-      if degrade.quality > 0
-        degrade.quality -= 2
-      end
-    end
+    return if degrade.quality == 0
+
+    degrade.quality -= 2
+
+    degrade.quality -= 2 if degrade.days_remaining < 0
   end
 end
 
@@ -76,17 +68,13 @@ end
 
 class NormalItem
   def tick(degrade)
-    if degrade.quality > 0
-      degrade.quality -= 1
-    end
-
     degrade.days_remaining -= 1
 
-    if degrade.days_remaining < 0
-      if degrade.quality > 0
-        degrade.quality -= 1
-      end
-    end
+    return if degrade.quality == 0
+
+    degrade.quality -= 1
+
+    degrade.quality -= 1 if degrade.days_remaining < 0
   end
 end
 

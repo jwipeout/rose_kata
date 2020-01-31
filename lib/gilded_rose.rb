@@ -1,12 +1,13 @@
 class ItemFactory
   def self.build(name)
-    if name == "Aged Brie"
+    case name
+    when 'Aged Brie'
       AgedBrie.new
-    elsif name == "Backstage passes to a TAFKAL80ETC concert"
+    when 'Backstage passes to a TAFKAL80ETC concert'
       BackstagePass.new
-    elsif name == "Conjured Mana Cake"
+    when 'Conjured Mana Cake'
       ConjuredManaCake.new
-    elsif name == "Sulfuras, Hand of Ragnaros"
+    when 'Sulfuras, Hand of Ragnaros'
       SulfurasHand.new
     else
       NormalItem.new

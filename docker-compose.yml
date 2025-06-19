@@ -2,5 +2,5 @@ services:
   rose_kata:
     image: jwipeout/rose_kata
     entrypoint: sleep infinity
-    volumes:
-      - ~/code/rose_kata:/root
+    #volumes:
+    #  - ~/code/rose_kata:/root

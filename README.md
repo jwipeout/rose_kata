@@ -45,5 +45,9 @@ docker exec -i -t rose_kata-rose_kata-1 bash
 
 ## Tests
 
-You can run tests using rspec
+You can run tests using [rspec](https://rspec.info/). After you have exec into the docker container use the command in your bash shell. 
+
+```
+rspec
+```
 

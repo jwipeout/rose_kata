@@ -1,3 +1,17 @@
+class GildedRose
+  attr_accessor :name, :days_remaining, :quality
+
+  def initialize(name:, days_remaining:, quality:)
+    @name = name
+    @days_remaining = days_remaining
+    @quality = quality
+  end
+
+  def tick
+    ItemFactory.build(name).tick(self)
+  end
+end
+
 class ItemFactory
   def self.build(name)
     case name
@@ -97,16 +111,3 @@ class NormalItem
   end
 end
 
-class GildedRose
-  attr_accessor :name, :days_remaining, :quality
-
-  def initialize(name:, days_remaining:, quality:)
-    @name = name
-    @days_remaining = days_remaining
-    @quality = quality
-  end
-
-  def tick
-    ItemFactory.build(name).tick(self)
-  end
-end

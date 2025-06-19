@@ -55,6 +55,14 @@ module ValidateItem
   def is_days_remaining_zero_or_greater?(days_remaining)
     days_remaining >= 0
   end
+
+  def is_days_remaining_less_than_11?(days_remaining)
+    days_remaining < 11
+  end
+
+  def is_days_remaining_less_than_6?(days_remaining)
+    days_remaining < 6
+  end
 end
 
 class AgedBrie
@@ -83,9 +91,9 @@ class BackstagePass
 
       update_quality(item, 1, '+')
 
-      update_quality(item, 1, '+')  if item.days_remaining < 11
+      update_quality(item, 1, '+')  if is_days_remaining_less_than_11?(item.days_remaining)
 
-      update_quality(item, 1, '+') if item.days_remaining < 6
+      update_quality(item, 1, '+') if is_days_remaining_less_than_6?(item.days_remaining)
     end
 
     update_days_remaining(item, 1, '-')

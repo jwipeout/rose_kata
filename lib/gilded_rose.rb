@@ -1,4 +1,4 @@
-class GildedRose
+class GildedRoseItem
   attr_accessor :name, :days_remaining, :quality
 
   def initialize(name:, days_remaining:, quality:)
@@ -29,85 +29,103 @@ class ItemFactory
   end
 end
 
-module UpdateGildedRose
-  def update_quality(gilded_rose, amount, operator)
-    gilded_rose.quality = gilded_rose.quality.send(operator, amount)
+module UpdateItem
+  def update_quality(item, amount, operator)
+    item.quality = item.quality.send(operator, amount)
   end
 
-  def update_days_remaining(gilded_rose, amount, operator)
-    gilded_rose.days_remaining = gilded_rose.days_remaining.send(operator, amount)
+  def update_days_remaining(item, amount, operator)
+    item.days_remaining = item.days_remaining.send(operator, amount)
+  end
+end
+
+module ValidateItem
+  def is_50_or_greater_quality?(quality)
+    quality >= 50
+  end
+
+  def is_less_than_50_quality?(quality)
+    quality <  50
+  end
+
+  def is_equal_to_0_quality?(quality)
+    quality == 0
+  end
+
+  def is_days_remaining_zero_or_greater?(days_remaining)
+    days_remaining >= 0
   end
 end
 
 class AgedBrie
-  include UpdateGildedRose
+  include UpdateItem, ValidateItem
 
-  def tick(gilded_rose)
-    update_days_remaining(gilded_rose, 1, '-')
+  def tick(item)
+    update_days_remaining(item, 1, '-')
 
-    return if gilded_rose.quality >= 50
+    return if is_50_or_greater_quality?(item.quality)
 
-    update_quality(gilded_rose, 1, '+')
+    update_quality(item, 1, '+')
 
-    return if gilded_rose.days_remaining >= 0
+    return if is_days_remaining_zero_or_greater?(item.days_remaining)
 
-    return if gilded_rose.quality >= 50
+    return if is_50_or_greater_quality?(item.quality)
 
-    update_quality(gilded_rose, 1, '+')
+    update_quality(item, 1, '+')
   end
 end
 
 class BackstagePass
-  include UpdateGildedRose
+  include UpdateItem, ValidateItem
 
-  def tick(gilded_rose)
-    if gilded_rose.quality < 50
+  def tick(item)
+    if is_less_than_50_quality?(item.quality)
 
-      update_quality(gilded_rose, 1, '+')
+      update_quality(item, 1, '+')
 
-      update_quality(gilded_rose, 1, '+')  if gilded_rose.days_remaining < 11
+      update_quality(item, 1, '+')  if item.days_remaining < 11
 
-      update_quality(gilded_rose, 1, '+') if gilded_rose.days_remaining < 6
+      update_quality(item, 1, '+') if item.days_remaining < 6
     end
 
-    update_days_remaining(gilded_rose, 1, '-')
+    update_days_remaining(item, 1, '-')
 
-    return if gilded_rose.days_remaining >= 0
+    return if is_days_remaining_zero_or_greater?(item.days_remaining)
 
-    update_quality(gilded_rose, gilded_rose.quality, '-')
+    update_quality(item, item.quality, '-')
   end
 end
 
 class ConjuredManaCake
-  include UpdateGildedRose
+  include UpdateItem, ValidateItem
 
-  def tick(gilded_rose)
-    update_days_remaining(gilded_rose, 1, '-')
+  def tick(item)
+    update_days_remaining(item, 1, '-')
 
-    return if gilded_rose.quality == 0
+    return if is_equal_to_0_quality?(item.quality)
 
-    update_quality(gilded_rose, 2, '-')
+    update_quality(item, 2, '-')
 
-    update_quality(gilded_rose, 2, '-') if gilded_rose.days_remaining < 0
+    update_quality(item, 2, '-') if item.days_remaining < 0
   end
 end
 
 class SulfurasHand
-  def tick(gilded_rose)
+  def tick(item)
   end
 end
 
 class NormalItem
-  include UpdateGildedRose
+  include UpdateItem, ValidateItem
 
-  def tick(gilded_rose)
-    update_days_remaining(gilded_rose, 1, '-')
+  def tick(item)
+    update_days_remaining(item, 1, '-')
 
-    return if gilded_rose.quality == 0
+    return if is_equal_to_0_quality?(item.quality)
 
-    update_quality(gilded_rose, 1, '-')
+    update_quality(item, 1, '-')
 
-    update_quality(gilded_rose, 1, '-') if gilded_rose.days_remaining < 0
+    update_quality(item, 1, '-') if item.days_remaining < 0
   end
 end
 

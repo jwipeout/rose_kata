@@ -9,6 +9,15 @@ This refactoring exercise showcases key software engineering principles such as 
 There are 2 files in the __/lib__ directory
 - gilded_rose_refactor_me.rb (the original ruby file that needs to be refactored)
 - gilded_rose.rb (the ruby file that has been refactored)
+
+### Refactoring
+
+When viewing the orginal code you can see that there are patterns (code smells) that can be identified.
+
+- I organized the items into objects. This enables a clear and concise understanding of the underlying business logic.
+- Every item class has its own tick method. Duck typing can be useful in allowing for flexible and reusable code.
+- I abstracted even simple business logic into modular components. This approach enhances flexibility by allowing the internal implementation to evolve without impacting the code that depends on it.
+- I put careful thought into naming classes, methods, and modules, as clear and consistent naming significantly improves code maintainability and readability. I strongly believe that meaningful naming has a lasting impact on the quality and longevity of a codebase.
   
 ## Usage
 
